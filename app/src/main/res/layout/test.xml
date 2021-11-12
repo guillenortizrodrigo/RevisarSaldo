@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:background="@color/colorPrimary">
+
+    <ImageView
+        android:layout_width="262dp"
+        android:layout_height="191dp"
+
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="275dp"
+        android:layout_gravity="bottom"
+        android:accessibilityLiveRegion="polite"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="553dp"
+            app:srcCompat="@drawable/swip" />
+    </FrameLayout>

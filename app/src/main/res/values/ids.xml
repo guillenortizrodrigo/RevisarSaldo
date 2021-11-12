@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="container" />
+    <item type="id" name="enableUrlFormatBtn" />
+    <item type="id" name="amountCt" />
+    <item type="id" name="scanLicenceQrBtn" />
+    <item type="id" name="showRequestBtn" />
+    <item type="id" name="payWithQrBtn" />
+    <item type="id" name="payBtn" />
+    <item type="id" name="TxVersion" />
+    <item type="id" name="rvOptions" />
+    <item type="id" name="amount" />
+    <item type="id" name="currencyCt" />
+    <item type="id" name="currency" />
+    <item type="id" name="tipCt" />
+    <item type="id" name="tip" />
+    <item type="id" name="roomCt" />
+    <item type="id" name="room" />
+    <item type="id" name="usrtrxCt" />
+    <item type="id" name="usrtrx" />
+    <item type="id" name="eferenceCt" />
+    <item type="id" name="reference" />
+    <item type="id" name="tnumber" />
+    <item type="id" name="authCt" />
+    <item type="id" name="auth" />
+    <item type="id" name="filterValueCt" />
+    <item type="id" name="tnumberCt" />
+    <item type="id" name="paymentMode" />
+    <item type="id" name="pmCt" />
+    <item type="id" name="filterValue" />
+    <item type="id" name="licence" />
+    <item type="id" name="licenceCt" />
+    <item type="id" name="referenceCt" />
+
+    <item type="id" name="ivProductCatalog" />
+    <item type="id" name="rlProductCatalogContainer"/>
+    <item type="id" name="tvProductCatalogTitle" />
+
+    <item type="id" name="tvOption" />
+    <item type="id" name="btnOption" />
+    <item type="id" name="mainPersonsCt" />
+
+
+
+
+
+
+
+</resources>

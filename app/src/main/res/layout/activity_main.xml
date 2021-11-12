@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/container" android:layout_width="fill_parent" android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ViewFlipper
+        android:id="@+id/simpleViewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="701dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/contenedorOpciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5.0px"
+                android:layout_marginRight="5.0dip"
+                android:scrollbarSize="1.0dip"
+                android:visibility="gone">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@id/rvOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:visibility="visible" />
+            </ScrollView>
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/contenedorDatos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25.0dip"
+                android:layout_marginTop="15.0dip"
+                android:layout_marginRight="25.0dip"
+                android:layout_marginBottom="20.0dip">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/contenedorMonto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2.0">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/monto"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Monto Transacción"
+                                android:imeOptions="actionNext"
+                                android:inputType="numberDecimal"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textSize="20.0sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@id/usrtrxCt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/odometrotrx"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Odómetro"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:inputType="numberDecimal"
+                            android:textSize="20sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@id/referenceCt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/pintrx"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="NIP"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="20sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2.0"
+                        android:orientation="horizontal">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/currencyBox"
+                            android:layout_width="0dp"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <android.support.v7.widget.AppCompatSpinner
+                                android:id="@+id/pos"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@id/licenceCt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.0dip">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/limite"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="Límite  de Fondos"
+                            android:inputType="none"
+                            android:maxLines="1"
+                            android:text=""
+                            android:textSize="20.0sp"
+                            android:visibility="visible" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+            <LinearLayout
+                android:id="@+id/contenedorBotones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnCancela"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Cancelar"
+                    android:textColor="@android:color/white"
+                    android:textSize="20.0sp"
+                    />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnEnviar"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="7dp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Enviar"
+                    android:textColor="@android:color/white"
+                    android:textSize="20.0sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:layout_width="262dp"
+                android:layout_height="191dp"
+
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/textoEstado"
+                android:layout_width="match_parent"
+                android:layout_height="275dp"
+                android:layout_gravity="bottom"
+                android:accessibilityLiveRegion="polite"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imagenEstado"
+                android:layout_width="match_parent"
+                android:layout_height="553dp"
+                app:srcCompat="@drawable/swip" />
+        </FrameLayout>
+    </ViewFlipper>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10.0dip"
+        android:orientation="horizontal"
+        android:weightSum="2.0">
+
+        <TextView
+            android:id="@id/TxVersion"
+            android:layout_width="205.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="300.0dip"
+            android:layout_weight="0.5"
+            android:gravity="center_horizontal"
+            android:paddingTop="5.0dip"
+            android:text="Version 1.0"
+            android:textSize="10.0sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:background="@color/green_400"
+    android:orientation="horizontal"
+    android:padding="@dimen/spacing_large">
+
+    <ImageView
+        android:id="@+id/imagenexito"
+        android:layout_width="121dp"
+        android:layout_height="108dp"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:src="@drawable/check" />
+
+    <TextView
+        android:id="@+id/mensajeexito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="10.0dip"
+        android:text="Se actualizó correctamente la información."
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</LinearLayout>
