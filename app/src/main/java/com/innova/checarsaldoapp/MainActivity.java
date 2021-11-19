@@ -1,17 +1,13 @@
-package com.innova.flotillaapp;
+package com.innova.checarsaldoapp;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -45,37 +41,31 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.google.gson.GsonBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.innova.checarsaldoapp.adaptador.OnRecyclerItemListener;
+import com.innova.checarsaldoapp.model.ErrorHandler;
 import com.pos.api.Mcr;
 
-import com.innova.flotillaapp.model.SquareItem;
-import com.innova.flotillaapp.adaptador.SquareItemAdapter;
-import com.innova.flotillaapp.adaptador.OnRecyclerItemListener;
+import com.innova.checarsaldoapp.model.SquareItem;
+import com.innova.checarsaldoapp.adaptador.SquareItemAdapter;
 
 import android.support.v4.widget.NestedScrollView;
 import android.widget.LinearLayout;
-import android.widget.HorizontalScrollView;
 
-import com.innova.flotillaapp.model.RestService;
+import com.innova.checarsaldoapp.model.RestService;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 
-import com.innova.flotillaapp.fragmento.FragmentUtils;
+import com.innova.checarsaldoapp.fragmento.FragmentUtils;
 import com.pos.api.Scan;
-import com.innova.flotillaapp.actividad.CaptureActivityPortrait;
+import com.innova.checarsaldoapp.actividad.CaptureActivityPortrait;
 
-import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.content.Context;
 
 public class MainActivity extends AppCompatActivity implements OnRecyclerItemListener<SquareItem> {
 
@@ -176,42 +166,9 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
         this.rvPrintOptions.setLayoutManager((RecyclerView.LayoutManager)gridLayoutManager);
         this.contenedorDatos=(NestedScrollView)findViewById(R.id.contenedorDatos);
         this.contenedorBotones=(LinearLayout)findViewById(R.id.contenedorBotones);
-        this.contenedorMonto=(LinearLayout)findViewById(R.id.contenedorMonto);
         this.contenedorOpciones = (ScrollView) findViewById(R.id.contenedorOpciones);
         this.imagenEsatdo=(ImageView) findViewById(R.id.imagenEstado);
         this.textoEstado=(TextView)findViewById(R.id.textoEstado);
-        this.limite = (AutoCompleteTextView)findViewById(R.id.limite);
-        this.limite.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable param1Editable) {}
-            public void beforeTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-            public void onTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-        });
-        this.monto = (AutoCompleteTextView)findViewById(R.id.monto);
-        this.monto.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable param1Editable) {}
-            public void beforeTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-            public void onTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-        });
-        this.odometrotrx = (AutoCompleteTextView)findViewById(R.id.odometrotrx);
-        this.odometrotrx.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable param1Editable) {}
-            public void beforeTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-            public void onTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-        });
-        this.pintrx = (AutoCompleteTextView)findViewById(R.id.pintrx );
-        this.pintrx .addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable param1Editable) {}
-            public void beforeTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-            public void onTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-        });
-        /*this.posiciontrx = (AutoCompleteTextView)findViewById(R.id.posiciontrx);
-        this.posiciontrx.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable param1Editable) {}
-            public void beforeTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-            public void onTextChanged(CharSequence param1CharSequence, int param1Int1, int param1Int2, int param1Int3) {}
-        });*/
-
-        this.pos = (Spinner) findViewById(R.id.pos);
 
         getCardOptions();
         this.currentEntity = this.lstOptions.get(0);
@@ -227,38 +184,6 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
 
 
 
-        btnCancela = (Button) findViewById(R.id.btnCancela);
-        btnCancela.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                try {
-                    hideAllItems(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        btnEnviar = (Button) findViewById(R.id.btnEnviar);
-        btnEnviar.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                if(validarDatos()) {
-                    textoEstado.setText("Enviando solicitud de autorizacion, espere por favor");
-                    imagenEsatdo.setImageDrawable(getResources().getDrawable(R.drawable.send));
-                    simpleViewFlipper.showNext();
-                    solicitaAutorizacion();
-                }else{
-                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this.ctx);
-                    builder.setTitle("Error de Validacion");
-                    builder.setMessage(mensajeVD);
-                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface param2DialogInterface, int param2Int) {}
-                    });
-                    builder.show();
-                }
-            }
-        });
-
-
     }
 
     private void getCardOptions() {
@@ -266,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
         this.lstOptions.add(new SquareItem(R.drawable.ic_card_magnetic, "Banda", "#008577", true));
         this.lstOptions.add(new SquareItem(R.drawable.barcode, "Código", "#008577", false));
         //this.lstOptions.add(new SquareItem(R.drawable.ic_barcode, "Tag", "#008577", false));
-        this.lstOptions.add(new SquareItem(R.drawable.ic_vale, "Vale", "#008577", false));
+        //this.lstOptions.add(new SquareItem(R.drawable.ic_vale, "Vale", "#008577", false));
         this.adapter.setLstProductCategory(this.lstOptions);
         this.adapter.notifyDataSetChanged();
     }
@@ -328,16 +253,6 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
             this.contenedorBotones.setVisibility(View.VISIBLE);
             this.contenedorOpciones.setVisibility(View.GONE);
         }
-
-        /*
-        this.tipCt.setVisibility(View.GONE);
-        this.roomCt.setVisibility(View.GONE);
-        this.referenceCt.setVisibility(View.GONE);
-        this.filterValueCt.setVisibility(View.GONE);
-        this.licenceCt.setVisibility(View.GONE);
-        this.usrtrxCt.setVisibility(View.GONE);
-        this.authCt.setVisibility(View.GONE);
-        this.tnumberCt.setVisibility(View.GONE);*/
     }
 
     private void ValidaCuenta(String valor){
@@ -347,7 +262,7 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
             // 3. build jsonObject
             JSONObject jsonObject = new JSONObject();
             String tip = tipo.toLowerCase();
-            Toast.makeText(ctx, tip, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(ctx, tip, Toast.LENGTH_SHORT).show();
             if(tip.equals("código")){
                 tip = "codigo";
             }
@@ -366,11 +281,6 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
         }catch(org.json.JSONException j){
             j.printStackTrace();
         }
-
-
-
-
-
     }
 
     private final Handler mHandlerGet = new Handler(){
@@ -378,25 +288,25 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
         public void handleMessage(Message msg){
            // t_query1.setText((String) msg.obj);
             codigoHTTP=msg.arg2;
+            //Toast.makeText(ctx, String.valueOf(codigoHTTP), Toast.LENGTH_SHORT).show();
             respuestaJSON=(String) msg.obj;
             System.out.println("Respuesta del WebService codigo:"+msg.arg2+" json: "+(String) msg.obj);
             //simpleViewFlipper.showPrevious();
             try{
                 //cliente=new JSONObject(respuestaJSON);
-                hideAllItems(((codigoHTTP==200)?false:true));
-                if(codigoHTTP!=200){
+                //hideAllItems(((codigoHTTP==200)?false:true));
+                if(codigoHTTP == 200){
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this.ctx);
-                    builder.setTitle("Error de Validacion");
-                    builder.setIcon(R.drawable.error);
-                    builder.setMessage((respuestaJSON.contains("descripcion"))?new JSONObject(respuestaJSON).getString("descripcion"):respuestaJSON.substring(0,((respuestaJSON.length()<200)?respuestaJSON.length():200)));
+                    builder.setTitle("Mensaje de Servidor");
+                    //builder.setIcon(R.drawable.error);
+                    builder.setMessage((respuestaJSON.contains("respuesta"))?new JSONObject(respuestaJSON).getString("respuesta"):respuestaJSON.substring(0,((respuestaJSON.length()<200)?respuestaJSON.length():200)));
                     //builder.setMessage((codigoHTTP!=200)?respuestaJSON:new JSONObject(respuestaJSON).getString("descripcion"));
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface param2DialogInterface, int param2Int) {}
                     });
                     builder.show();
                 }else{
-                    cliente=new JSONObject(respuestaJSON);
-                    setDatos();
+                    Log.d("JSON RECIBIDO", respuestaJSON);
                 }
             }catch(Exception e){
 
@@ -404,187 +314,12 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
         }
     };
 
-    private final Handler mHandlerP = new Handler(){
-        @Override
-        public void handleMessage(Message msg){
-            // t_query1.setText((String) msg.obj);
-            codigoHTTP=msg.arg2;
-            respuestaJSON=(String) msg.obj;
-            System.out.println("Respuesta del WebService codigo:"+msg.arg2+" json: "+(String) msg.obj);
-            simpleViewFlipper.showPrevious();
-            hideAllItems(true);
-            limpiar();
-            try{
-                //autorizacion=new JSONObject(respuestaJSON);
-                if(codigoHTTP!=200){
-                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this.ctx);
-                    builder.setTitle("Error de Autorizacion");
-                    builder.setIcon(R.drawable.error);
-                    //builder.setMessage(autorizacion.getString("mensaje"));
-                    builder.setMessage((respuestaJSON.contains("mensaje"))?new JSONObject(respuestaJSON).getString("mensaje"):respuestaJSON.substring(0,((respuestaJSON.length()<200)?respuestaJSON.length():200)));
-                    //builder.setMessage((codigoHTTP!=200)?respuestaJSON:new JSONObject(respuestaJSON).getString("mensaje"));
-                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface param2DialogInterface, int param2Int) {}
-                    });
-                    builder.show();
-                }else{
-                    //setDatos();
-                    autorizacion=new JSONObject(respuestaJSON);
-                    System.out.println(autorizacion.getString("mensaje"));
-                    FragmentUtils.showSuccessMessage(ctx, autorizacion.getString("mensaje"));
-                }
-            }catch(Exception e){
-
-            }
-        }
-    };
-
-    public void seeteaComboposiciones_carga(ArrayList<String> combo_options, ArrayList<Integer> combo_pos){
-        posicionesdecarga_disponibles = combo_pos;
-        comboposiciones_carga = combo_options;
-
-        pos.setAdapter(new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_spinner_dropdown_item, comboposiciones_carga));
-
-    }
-
-    private final Handler mHandlerPostPos = new Handler(){
-        @Override
-        public void handleMessage(Message msg){
-            codigoHTTP=msg.arg2;
-            respuestaJSON=(String) msg.obj;
-            System.out.println("Respuesta del WebService codigo:"+msg.arg2+" json: "+(String) msg.obj);
-            try{
-                if(codigoHTTP!=200){
-                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this.ctx);
-                    builder.setTitle("Error de Validacion");
-                    builder.setIcon(R.drawable.error);
-                    if(codigoHTTP == 500){
-                        builder.setMessage("ERROR INTERNO EN SERVIDOR");
-                    }else{
-                        builder.setMessage((respuestaJSON.contains("descripcion"))?new JSONObject(respuestaJSON).getString("descripcion"):respuestaJSON.substring(0,((respuestaJSON.length()<200)?respuestaJSON.length():200)));
-
-                    }
-                    builder.setMessage((respuestaJSON.contains("descripcion"))?new JSONObject(respuestaJSON).getString("descripcion"):respuestaJSON.substring(0,((respuestaJSON.length()<200)?respuestaJSON.length():200)));
-                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface param2DialogInterface, int param2Int) {}
-                    });
-                    builder.show();
-                }else{
-
-                    items=new JSONObject(respuestaJSON);
-                    posicionesJSON = items.getJSONArray("items");
-                    //Toast.makeText(ctx, "EL CODIGO LLEGO HASTA AQUI", Toast.LENGTH_SHORT).show();
-                    //posicionesJSON=new JSONArray(respuestaJSON);
-                    ArrayList<Integer> pos_disponibles = new ArrayList<>();
-                    ArrayList<String> combo_pos = new ArrayList<>();
-                    for(int i=0; i<posicionesJSON.length(); i++){
-                        JSONObject productosJSON = posicionesJSON.getJSONObject(i);
-                        int posicion = productosJSON.getInt("pc");
-                        pos_disponibles.add(posicion);
-                        String combo = "Posición de Carga "+String.valueOf(posicion);
-                        combo_pos.add(combo);
-                        Log.d("COMBO DE LOS PRODUCTOS",combo);
-                    }
-                    seeteaComboposiciones_carga(combo_pos,pos_disponibles);
-                    //saveposiciones(arrayposJson);
-                    //setcomboproductos(1);
-                }
-            }catch(Exception e){
-
-            }
-        }
-    };
-
-    public void setDatos(){
-        try{
-            isodometro=((cliente.getString("odometro").equalsIgnoreCase("si"))?true:false);
-            isnip=((cliente.getString("nip").equalsIgnoreCase("si"))?true:false);
-            islimite=((cliente.getString("limite").equalsIgnoreCase("si"))?true:false);
-            if(islimite){
-                contenedorMonto.setVisibility(View.VISIBLE);
-            }else{
-                contenedorMonto.setVisibility(View.GONE);
-            }
-            saldo=cliente.getDouble("fondos");
-            odometrotrx.setEnabled(isodometro);
-            pintrx.setEnabled(isnip);
-            limite.setText(cliente.getString("fondos"));
-
-        }catch(Exception e){
-
-        }
-    }
-
-    private boolean validarDatos() {
-        boolean bool1;
-        boolean bool2 = false;
-
-        bool1 = bool2;
-           // if (!this.monto.getText().toString().equals("")) {
-             //   bool1 = bool2;
-                if (!this.odometrotrx.getText().toString().equals("") || !isodometro) {
-                    bool1 = bool2;
-                    if (!this.pintrx.getText().toString().equals("")|| !isnip) {
-                        bool1 = bool2;
-                        /*if (!this.posiciontrx.getText().toString().equals("")) {
-                            bool1 = bool2;*/
-                            if(islimite){
-                                if(!this.monto.getText().toString().equals("")){
-                                    if (!(Double.valueOf(monto.getText().toString())>saldo)) {
-                                        bool1 = true;
-                                    }else{
-                                        mensajeVD="Monto es mayor al saldo;";
-                                    }
-                                }else{
-                                    mensajeVD="Favor de especificar monto";
-                                }
-                            }else{
-                                bool1 = true;
-                            }
-
-                        //}
-                    }
-                }
-
-
-        return bool1;
-    }
-
-    private void solicitaAutorizacion(){
-        try {
-
-                String json;
-                // 3. build jsonObject
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("monto",((islimite)?Double.valueOf(monto.getText().toString()):"0.00"));
-                String tip = tipo.toLowerCase();
-                //Toast.makeText(ctx, tip, Toast.LENGTH_SHORT).show();
-                if(tip.equals("código")){
-                    tip = "codigo";
-                }
-                jsonObject.put("tipo",tip);
-                jsonObject.put("datos", valortrack1);
-                jsonObject.put("terminal",Terminal);
-                if(isodometro)
-                jsonObject.put("odometro", Integer.valueOf(odometrotrx.getText().toString()));
-                if(isnip)
-                jsonObject.put("nip", Integer.valueOf(pintrx.getText().toString()));
-                int posicionseleccionada = posicionesdecarga_disponibles.get(pos.getSelectedItemPosition());
-                jsonObject.put("posicion", posicionseleccionada);
-                 json = jsonObject.toString();
-                System.out.println("InputStream...." + json);
-                restServiceP.setEntity(json);
-                restServiceP.execute();
-            com.innova.flotillaapp.model.ErrorHandler.toCatch(this);
 
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-    }
+
+
 
     private void limpiar(){
         monto.setText("");
@@ -628,10 +363,6 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
         i.setFlags(0);
         i.putExtra("request","SI");
         startActivityForResult(i,launch_configuracion);
-        /*SharedPreferences prefs =
-                getPreferences(Context.MODE_PRIVATE);
-        IP = prefs.getString("IP", "http://192.168.0.117:8080");
-        licencia = prefs.getString("licencia", "MWE4MDczMzUtYmU1Yy00NjliLTkxMzQtMzk4NTQyODZlY2Qw");*/
 
     }
 
@@ -722,16 +453,16 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
             Terminal = Build.SERIAL.toString();
             IP = paramIntent.getStringExtra("ipdirection");
             licencia = paramIntent.getStringExtra("licencia");
-            restServiceG = new RestService(mHandlerGet, this, IP+"/apiterminal/ValidaCuenta?terminal="+Terminal, RestService.POST); //Create new rest service for get
+            restServiceG = new RestService(mHandlerGet, this, IP+"/apiterminal/ConsultaSaldo?terminal="+Terminal, RestService.POST); //Create new rest service for get
             restServiceG.addHeader("Content-Type","application/json");
 
-            restServiceP= new RestService(mHandlerP, this, IP+"/apiterminal/SolicitaAutorizacion?terminal="+Terminal, RestService.POST); //Create new rest service for get
-            restServiceP.addHeader("Content-Type","application/json");
+            /*restServiceP= new RestService(mHandlerP, this, IP+"/apiterminal/SolicitaAutorizacion?terminal="+Terminal, RestService.POST); //Create new rest service for get
+            restServiceP.addHeader("Content-Type","application/json");*/
 
-            restServicePp = new RestService(mHandlerPostPos,this,IP+"/apiterminal/ConfigPosiciones?terminal="+Terminal,RestService.POST); //CRETAE new rest for get
+            /*restServicePp = new RestService(mHandlerPostPos,this,IP+"/apiterminal/ConfigPosiciones?terminal="+Terminal,RestService.POST); //CRETAE new rest for get
             restServicePp.addHeader("Content-Type","application/json");
 
-            restServicePp.execute();
+            restServicePp.execute();*/
         }
 
         if (paramInt1 == 322) {

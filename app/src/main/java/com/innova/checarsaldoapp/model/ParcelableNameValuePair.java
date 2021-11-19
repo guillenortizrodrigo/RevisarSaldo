@@ -1,4 +1,4 @@
-package com.innova.flotillaapp.model;
+package com.innova.checarsaldoapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

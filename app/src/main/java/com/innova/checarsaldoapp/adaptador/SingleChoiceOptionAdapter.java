@@ -1,4 +1,4 @@
-package com.innova.flotillaapp.adaptador;
+package com.innova.checarsaldoapp.adaptador;
 
 
 import android.content.Context;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.balysv.materialripple.MaterialRippleLayout;
-import com.innova.flotillaapp.R;
-import com.innova.flotillaapp.model.Option;
+import com.innova.checarsaldoapp.R;
+import com.innova.checarsaldoapp.model.Option;
 
 import java.util.List;
 

@@ -44,66 +44,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/contenedorMonto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2.0">
 
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
 
-                            <AutoCompleteTextView
-                                android:id="@+id/monto"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Monto Transacción"
-                                android:imeOptions="actionNext"
-                                android:inputType="numberDecimal"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:textSize="20.0sp" />
-                        </android.support.design.widget.TextInputLayout>
 
-                    </LinearLayout>
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@id/usrtrxCt"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15.0dip">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/odometrotrx"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Odómetro"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:inputType="numberDecimal"
-                            android:textSize="20sp" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@id/referenceCt"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15.0dip">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/pintrx"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="NIP"
-                            android:imeOptions="actionNext"
-                            android:inputType="numberDecimal"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:textSize="20sp" />
-                    </android.support.design.widget.TextInputLayout>
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -111,41 +56,7 @@
                         android:layout_weight="2.0"
                         android:orientation="horizontal">
 
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/currencyBox"
-                            android:layout_width="0dp"
-
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                            <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/pos"
-                                style="@style/Widget.AppCompat.Spinner.Underlined"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
-                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@id/licenceCt"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15.0dip">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/limite"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="Límite  de Fondos"
-                            android:inputType="none"
-                            android:maxLines="1"
-                            android:text=""
-                            android:textSize="20.0sp"
-                            android:visibility="visible" />
-                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
 
@@ -157,30 +68,16 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatButton
-                    android:id="@+id/btnCancela"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginRight="7dp"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:gravity="center"
-                    android:text="Cancelar"
-                    android:textColor="@android:color/white"
-                    android:textSize="20.0sp"
-                    />
-
-                <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btnEnviar"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_marginRight="7dp"
+                    android:layout_marginLeft="7dp"
                     android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:text="Enviar"
+                    android:text="Aceptar"
                     android:textColor="@android:color/white"
                     android:textSize="20.0sp" />
 

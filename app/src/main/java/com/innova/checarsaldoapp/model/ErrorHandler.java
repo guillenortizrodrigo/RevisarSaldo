@@ -1,4 +1,4 @@
-package com.innova.flotillaapp.model;
+package com.innova.checarsaldoapp.model;
 
 import android.app.Activity;
 import android.app.ActivityManager;

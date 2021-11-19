@@ -1,7 +1,6 @@
-package com.innova.flotillaapp.adaptador;
+package com.innova.checarsaldoapp.adaptador;
 
 
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.innova.flotillaapp.R;
-import com.innova.flotillaapp.model.SquareItem;
+import com.innova.checarsaldoapp.R;
+import com.innova.checarsaldoapp.model.SquareItem;
 
 import java.util.List;
 

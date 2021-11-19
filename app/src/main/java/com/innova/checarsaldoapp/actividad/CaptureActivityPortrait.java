@@ -1,4 +1,4 @@
-package com.innova.flotillaapp.actividad;
+package com.innova.checarsaldoapp.actividad;
 
 import com.journeyapps.barcodescanner.CaptureActivity;
 

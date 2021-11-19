@@ -1,4 +1,4 @@
-package com.innova.flotillaapp;
+package com.innova.checarsaldoapp;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.innova.flotillaapp", appContext.getPackageName());
+        assertEquals("com.innova.checarsaldoapp", appContext.getPackageName());
     }
 }

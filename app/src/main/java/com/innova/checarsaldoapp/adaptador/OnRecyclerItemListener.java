@@ -1,4 +1,4 @@
-package com.innova.flotillaapp.adaptador;
+package com.innova.checarsaldoapp.adaptador;
 
 import android.view.View;
 

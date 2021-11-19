@@ -1,4 +1,4 @@
-package com.innova.flotillaapp.model;
+package com.innova.checarsaldoapp.model;
 
 import java.io.Serializable;
 import java.util.List;

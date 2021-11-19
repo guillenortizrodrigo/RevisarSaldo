@@ -1,4 +1,4 @@
-package com.innova.flotillaapp.fragmento;
+package com.innova.checarsaldoapp.fragmento;
 
 
 import android.app.Activity;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
-import com.innova.flotillaapp.R;
+import com.innova.checarsaldoapp.R;
 
 
 public class FragmentUtils {

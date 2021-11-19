@@ -1,13 +1,10 @@
-package com.innova.flotillaapp.model;
+package com.innova.checarsaldoapp.model;
 
-import android.app.Fragment;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
-
-import com.innova.flotillaapp.fragmento.FragmentUtils;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -24,7 +21,6 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
