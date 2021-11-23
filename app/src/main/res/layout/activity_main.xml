@@ -131,7 +131,7 @@
             android:layout_weight="0.5"
             android:gravity="center_horizontal"
             android:paddingTop="5.0dip"
-            android:text="Version 1.0"
+            android:text="Version 1.1"
             android:textSize="10.0sp"
             android:textStyle="bold" />
     </LinearLayout>

@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.enercon.updateapps.AppUtils;
+import com.enercon.updateapps.UpdateChecker;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.innova.checarsaldoapp.adaptador.OnRecyclerItemListener;
@@ -138,6 +140,9 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        System.out.println("versionName = " + AppUtils.getVersionName(this) + " versionCode = " + AppUtils.getVersionCode(this));
+        UpdateChecker.checkForDialog(MainActivity.this);
         setContentView(R.layout.activity_main);
         this.ctx = (Context) this;
         cargarPreferencia();
