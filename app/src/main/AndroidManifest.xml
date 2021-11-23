@@ -54,8 +54,10 @@
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
-        <provider android:name="com.innova.checarsaldoapp.UpdateApkFileProvider" android:exported="false" android:grantUriPermissions="true"
-            android:authorities="${applicationId}.provider">
+        <service android:name="com.enercon.updateapps.DownloadService" android:exported="false"/>
+        
+        <provider android:name="com.innova.checarsaldoapp.update.UpdateApkFileProvider" android:exported="false" android:grantUriPermissions="true"
+            android:authorities="${applicationId}.update.provider">
 
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/update_apk_paths"/>
 
