@@ -55,7 +55,7 @@
         </activity>
 
         <service android:name="com.enercon.updateapps.DownloadService" android:exported="false"/>
-        
+
         <provider android:name="com.innova.checarsaldoapp.update.UpdateApkFileProvider" android:exported="false" android:grantUriPermissions="true"
             android:authorities="${applicationId}.update.provider">
 
