@@ -7,13 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -52,7 +49,6 @@ import com.pos.api.Mcr;
 import com.innova.checarsaldoapp.model.SquareItem;
 import com.innova.checarsaldoapp.adaptador.SquareItemAdapter;
 
-import android.support.v4.widget.NestedScrollView;
 import android.widget.LinearLayout;
 
 import com.innova.checarsaldoapp.model.RestService;
@@ -60,6 +56,13 @@ import com.innova.checarsaldoapp.model.RestService;
 import android.os.Handler;
 import android.os.Message;
 import android.content.DialogInterface;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.innova.checarsaldoapp.fragmento.FragmentUtils;
 import com.pos.api.Scan;
@@ -212,6 +215,19 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
         this.adapter.notifyDataSetChanged();
     }
 
+    private void ErrorConexionM() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this.ctx);
+        builder.setTitle("Error de Conexión");
+        builder.setIcon(R.drawable.error);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface param2DialogInterface, int param2Int) {
+                finish();
+            }
+        });
+        builder.show();
+    }
+
     public void onClickListener(View paramView, SquareItem paramSquareItem) {
         this.currentEntity = paramSquareItem;
         tipo=paramSquareItem.getTitle();
@@ -300,14 +316,21 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
             try{
                 //cliente=new JSONObject(respuestaJSON);
                 //hideAllItems(((codigoHTTP==200)?false:true));
-                if(codigoHTTP == 200){
+
+                if(codigoHTTP == 0){
+                    ErrorConexionM();
+                }
+                else if(codigoHTTP == 200){
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this.ctx);
                     builder.setTitle("Mensaje de Servidor");
+                    builder.setCancelable(false);
                     //builder.setIcon(R.drawable.error);
                     builder.setMessage((respuestaJSON.contains("respuesta"))?new JSONObject(respuestaJSON).getString("respuesta"):respuestaJSON.substring(0,((respuestaJSON.length()<200)?respuestaJSON.length():200)));
                     //builder.setMessage((codigoHTTP!=200)?respuestaJSON:new JSONObject(respuestaJSON).getString("descripcion"));
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface param2DialogInterface, int param2Int) {}
+                        public void onClick(DialogInterface param2DialogInterface, int param2Int) {
+                            finish();
+                        }
                     });
                     builder.show();
                 }else{

@@ -2,14 +2,16 @@ package com.innova.checarsaldoapp.adaptador;
 
 
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.balysv.materialripple.MaterialRippleLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.innova.checarsaldoapp.R;
 import com.innova.checarsaldoapp.model.Option;
 

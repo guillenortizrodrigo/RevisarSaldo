@@ -11,8 +11,10 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import android.content.pm.ApplicationInfo;
 import  	android.content.pm.PackageManager;
 import android.os.Debug;
-import android.support.annotation.NonNull;
+
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 public class ErrorHandler implements
         java.lang.Thread.UncaughtExceptionHandler{

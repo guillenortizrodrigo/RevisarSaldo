@@ -4,12 +4,13 @@ package com.innova.checarsaldoapp.fragmento;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.support.design.widget.BottomSheetDialog;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.innova.checarsaldoapp.R;
 
 
