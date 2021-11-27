@@ -319,8 +319,21 @@ public class MainActivity extends AppCompatActivity implements OnRecyclerItemLis
 
                 if(codigoHTTP == 0){
                     ErrorConexionM();
-                }
-                else if(codigoHTTP == 200){
+                }else if(codigoHTTP!=200){
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this.ctx);
+                    builder.setTitle("Notificacion");
+                    builder.setIcon(R.drawable.error);
+                    builder.setCancelable(false);
+                    //builder.setMessage(autorizacion.getString("mensaje"));
+                    builder.setMessage((respuestaJSON.contains("mensaje"))?new JSONObject(respuestaJSON).getString("mensaje"):respuestaJSON.substring(0,((respuestaJSON.length()<200)?respuestaJSON.length():200)));
+                    //builder.setMessage((codigoHTTP!=200)?respuestaJSON:new JSONObject(respuestaJSON).getString("mensaje"));
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface param2DialogInterface, int param2Int) {
+                            finish();
+                        }
+                    });
+                    builder.show();
+                } else if(codigoHTTP == 200){
                     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this.ctx);
                     builder.setTitle("Mensaje de Servidor");
                     builder.setCancelable(false);

@@ -7,7 +7,7 @@ android {
         applicationId "com.innova.checarsaldoapp"
         minSdkVersion 27
         targetSdkVersion 26
-        versionCode 3
+        versionCode 4
         versionName "consultarSaldoApp"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
